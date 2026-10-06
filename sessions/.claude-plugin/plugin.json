@@ -1,0 +1,11 @@
+{
+  "name": "sessions",
+  "version": "0.1.0",
+  "description": "/sessions: pane listing this project's past sessions from prompt history",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "cmbaldwin"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/cmbaldwin/claude-usage-band"
+}

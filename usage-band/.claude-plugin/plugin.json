@@ -1,0 +1,25 @@
+{
+  "name": "usage-band",
+  "version": "0.4.0",
+  "description": "Responsive band above the prompt: context fill, 5h/7d rate limits, session tokens and cost",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "icons": {
+      "type": "boolean",
+      "title": "Nerd Font icons",
+      "description": "Use Nerd Font glyphs (icons, rounded bar ends). Set the terminal font to a Nerd Font first, or they show as boxes.",
+      "default": false
+    },
+    "hideStatus": {
+      "type": "boolean",
+      "title": "Hide status lines",
+      "description": "Clear every status line other plugins set ($.ui.status), so the bottom row shows only the mode labels. The band still shows the jev router status.",
+      "default": false
+    }
+  },
+  "author": {
+    "name": "cmbaldwin"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/cmbaldwin/claude-usage-band"
+}
