@@ -5,6 +5,14 @@ Two [Claude Code mods](https://code.claude.com/docs/en/plugins/mods/overview):
 - **`usage-band`**: a compact, responsive band above the prompt with your context fill, 5h and 7d rate limits, prompt-cache state, cost, and a few extras.
 - **`sessions`**: `/sessions` opens a pane listing this project's past sessions (short id, age, prompt count, first prompt), read from your prompt history.
 
+**Looks best with a [Nerd Font](https://www.nerdfonts.com/).** The icons and rounded bar ends need one, and they are off by default: without a Nerd Font the band still works, with words for labels and half-block ends. A mod cannot install or select a font, so you do that yourself:
+
+```sh
+brew install --cask font-jetbrains-mono-nerd-font   # macOS; any Nerd Font works
+```
+
+then set your terminal's font to it (for Terminal.app: Settings → Profiles → Font) and turn on the `icons` option below.
+
 Built and tested on Claude Code 2.1.289, macOS, in a terminal. Mods are a new API, so expect it to move.
 
 ## What the band shows
