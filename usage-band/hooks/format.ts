@@ -126,7 +126,7 @@ export const pace = (pct: number, elapsed: number | null, winMs: number, remaini
 // Nerd Font glyphs, used only when the `icons` option is on
 const ICON = {
   ctx: '\uf2db', five_hour: '\uf017', seven_day: '\uf073', cache: '\uf1c0',
-  git: '\ue725', pr: '\uf407', jev: '\uf0e7', skill: '\uf0eb',
+  git: '\ue725', pr: '\uf407', jev: '\uf0e7', skill: '\uf0eb', advisor: '\uf19d',
 }
 
 // ---- solid bars: cells are background color; the edge cell is an eighth-block over the track ----
@@ -205,6 +205,8 @@ export const jevShort = (text: string) => {
 export const buildSegs = (u: Usage, m: Mode, now: number, icons = false, misc = 0): Seg[] => {
   const segs: Seg[] = []
   const lab = (text: string, key: keyof typeof ICON) => (icons ? ICON[key] : text)
+  // advisor mode: one glyph, lit when on, dim when off
+  const adv: Run = icons ? { t: ICON.advisor, c: u.advisor ? 'magenta' : undefined, d: !u.advisor } : { t: u.advisor ? '◆' : '◇', c: u.advisor ? 'magenta' : undefined, d: !u.advisor }
 
   if (u.ctxPct !== null) {
     const abs = m.abs && u.ctxTokens !== null && u.ctxWindow ? `${k(u.ctxTokens)}/${k(u.ctxWindow)}` : ''
@@ -255,13 +257,13 @@ export const buildSegs = (u: Usage, m: Mode, now: number, icons = false, misc = 
       segs.push({ key: 'git', prio: 6, groups })
     }
 
-    if (u.pt) segs.push({ key: 'pt', prio: 7, groups: [[{ t: u.pt, d: true }]] })
+    segs.push({ key: 'pt', prio: 7, groups: [[adv], ...(u.pt ? [[{ t: u.pt, d: true }]] : [])] })
 
     if (u.jev && m.jev) segs.push({ key: 'jev', prio: 8, groups: [[{ t: lab('jev', 'jev'), d: true }], [{ t: trunc(u.jev, m.jev), c: 'cyan' }]] })
 
     if (u.skill && m.skill) segs.push({ key: 'skill', prio: 9, groups: [[{ t: lab('skill', 'skill'), d: true }], [{ t: trunc(u.skill, 14), c: 'magenta' }]] })
   } else {
-    const groups: Run[][] = []
+    const groups: Run[][] = [[adv]]
     if (u.pt) groups.push([{ t: u.pt, d: true }])
     if (u.branch && misc <= 3) {
       // last path part of the branch, and the PR number stuck to it: "⎇login-to…*218"
@@ -274,7 +276,7 @@ export const buildSegs = (u: Usage, m: Mode, now: number, icons = false, misc = 
     }
     if (u.jev && misc <= 2) groups.push([{ t: jevShort(u.jev), c: 'cyan' }])
     if (u.skill && misc <= 1) groups.push([{ t: `/${trunc(u.skill, 8)}`, c: 'magenta' }])
-    if (groups.length) segs.push({ key: 'misc', prio: 6, groups })
+    segs.push({ key: 'misc', prio: 6, groups })
   }
 
   if (m.tokens) {

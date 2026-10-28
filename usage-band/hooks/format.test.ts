@@ -43,7 +43,7 @@ const u: Usage = {
     { kind: 'five_hour', percentUsed: 72, resetsAt: new Date(NOW + 2 * 3600e3).toISOString() },
     { kind: 'seven_day', percentUsed: 41, resetsAt: new Date(NOW + 3 * 86400e3).toISOString() },
   ],
-  spark: { buckets: [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], nowIdx: 1 }, usd: 0.12, out: 12000, cached: 340000, now: NOW, jev: 'balanced 82% → sonnet/high', skill: 'ponytail', pt: 'pt',
+  spark: { buckets: [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], nowIdx: 1 }, usd: 0.12, out: 12000, cached: 340000, now: NOW, jev: 'balanced 82% → sonnet/high', skill: 'ponytail', pt: 'pt', advisor: true,
   cache: { warm: true, ttl: '1h', expiresAt: NOW / 1000 + 2280, hit: 0.91, misses: 0, recache: 82000 },
   branch: 'feature/login-toggle', dirty: true, pr: { number: 218, state: 'OPEN', isDraft: false },
 }

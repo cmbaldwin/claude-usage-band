@@ -7,7 +7,7 @@ import type { Hist } from './format'
 
 const usage = atom(
   { plugin: 'usage-band', key: 'usage' } as const,
-  { ctxPct: null, ctxTokens: null, ctxWindow: null, limits: [], usd: null, out: 0, cached: 0, now: 0, jev: null, skill: null, pt: null, spark: null, cache: null, branch: null, dirty: false, pr: null } as Usage
+  { ctxPct: null, ctxTokens: null, ctxWindow: null, limits: [], usd: null, out: 0, cached: 0, now: 0, jev: null, skill: null, pt: null, advisor: false, spark: null, cache: null, branch: null, dirty: false, pr: null } as Usage
 )
 
 // Claude Code's config folder: CLAUDE_CONFIG_DIR, else ~/.claude
@@ -87,8 +87,13 @@ export const register: Register = (on, options) => {
     } else if (pct < 60) isWarned = false
     // the ponytail plugin writes its mode here; no file = no tag
     const mode = await $.fs.read(`${await claudeDir($)}/.ponytail-active`).then(t => t.trim().split('\n')[0]?.trim() ?? '', () => null)
+    // advisor-toggle.sh writes advisorModel into the project's settings.local.json
+    const local = await $.fs.read(`${await $.session.cwd()}/.claude/settings.local.json`).catch(() => '')
+    let advisor = false
+    try { advisor = !!JSON.parse(local).advisorModel } catch {}
     await update($, usage, u => ({
       ...u,
+      advisor,
       ctxPct: e.context.percent ?? null,
       ctxTokens: e.context.tokens ?? null,
       ctxWindow: e.context.window,

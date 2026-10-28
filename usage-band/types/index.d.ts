@@ -13,6 +13,7 @@ export type Usage = {
   jev: string | null
   skill: string | null
   pt: string | null
+  advisor: boolean
   spark: Spark | null
   cache: Cache | null
   branch: string | null
