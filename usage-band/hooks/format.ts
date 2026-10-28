@@ -206,7 +206,7 @@ export const buildSegs = (u: Usage, m: Mode, now: number, icons = false, misc = 
   const segs: Seg[] = []
   const lab = (text: string, key: keyof typeof ICON) => (icons ? ICON[key] : text)
   // advisor mode: one glyph, lit when on, dim when off
-  const adv: Run = icons ? { t: ICON.advisor, c: u.advisor ? 'magenta' : undefined, d: !u.advisor } : { t: u.advisor ? '◆' : '◇', c: u.advisor ? 'magenta' : undefined, d: !u.advisor }
+  const adv: Run = icons ? { t: `${ICON.advisor} `, c: u.advisor ? 'magenta' : undefined, d: !u.advisor } : { t: u.advisor ? '◆' : '◇', c: u.advisor ? 'magenta' : undefined, d: !u.advisor }
 
   if (u.ctxPct !== null) {
     const abs = m.abs && u.ctxTokens !== null && u.ctxWindow ? `${k(u.ctxTokens)}/${k(u.ctxWindow)}` : ''
